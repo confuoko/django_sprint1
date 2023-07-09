@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Игнорировать папку .vs
-.vs
+.vs/
 
 # C extensions
 *.so
