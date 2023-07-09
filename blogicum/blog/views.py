@@ -1,7 +1,4 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render
 
 posts = [
@@ -49,17 +46,17 @@ posts = [
 
 
 def index(request):
-    template = 'blog/index.html'
-    return render(request, template, context={'posts': posts})
+    return render(request, 'blog/index.html', context={'posts': posts})
 
 
 def post_detail(request, id):
-    template = 'blog/detail.html'
+    allIds = [post['id'] for post in posts]
+    if (id not in allIds):
+        raise Http404()
     context = {'post': posts[id]}
-    return render(request, template, context)
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    template = 'blog/category.html'
     context = {'category_slug': category_slug}
-    return render(request, template, context)
+    return render(request, 'blog/category.html', context)
