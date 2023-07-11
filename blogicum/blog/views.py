@@ -50,8 +50,8 @@ def index(request):
 
 
 def post_detail(request, id):
-    allIds = [post['id'] for post in posts]
-    if (id not in allIds):
+    all_ids = [post['id'] for post in posts]
+    if (id not in all_ids):
         raise Http404()
     context = {'post': posts[id]}
     return render(request, 'blog/detail.html', context)
